@@ -4,16 +4,21 @@ const imageminPngquant = require("imagemin-pngquant");
 const imageminGifsicle = require("imagemin-gifsicle");
 const imageminSvgo = require("imagemin-svgo");
 
-const targetDirName = "ko365";
+const targetDirNames = [
+  //
+  "src",
+];
 
-imagemin([`${targetDirName}/*.{jpg,png,gif,svg}`], {
-  destination: `dest/${targetDirName}`,
-  plugins: [
-    imageminMozjpeg({ quality: 100 }),
-    imageminPngquant({ quality: "65-80" }),
-    imageminGifsicle(),
-    imageminSvgo()
-  ]
-}).then(() => {
-  console.log("Images optimized!");
-});
+for (const name of targetDirNames) {
+  imagemin([`${name}/*.{jpg,JPG,png,gif,svg}`], {
+    destination: `dest/${name}`,
+    plugins: [
+      imageminMozjpeg({ quality: 80 }),
+      imageminPngquant({ quality: [0.3, 0.4] }),
+      imageminGifsicle(),
+      imageminSvgo(),
+    ],
+  }).then(() => {
+    console.log("Images optimized!");
+  });
+}
