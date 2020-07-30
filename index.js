@@ -6,12 +6,12 @@ const imageminSvgo = require("imagemin-svgo");
 
 const targetDirNames = [
   //
-  "src",
+  "target",
 ];
 
 for (const name of targetDirNames) {
   imagemin([`${name}/*.{jpg,JPG,png,gif,svg}`], {
-    destination: `dest/${name}`,
+    destination: `dest`,
     plugins: [
       imageminMozjpeg({ quality: 80 }),
       imageminPngquant({ quality: [0.3, 0.4] }),
